@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CalenderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ihj-RA-eUt">
+                    <rect key="frame" x="0.0" y="55" width="320" height="40"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdw-2c-3aR">
+                            <rect key="frame" x="15" y="5" width="30" height="30"/>
+                            <state key="normal" title="上月"/>
+                            <connections>
+                                <action selector="clickPreBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="Orb-Df-bjh"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uuQ-1Q-6cS">
+                            <rect key="frame" x="275" y="5" width="30" height="30"/>
+                            <state key="normal" title="下月"/>
+                            <connections>
+                                <action selector="clickNextBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="AyE-Lx-Avf"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="月份显示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IgS-nv-FfK">
+                            <rect key="frame" x="126" y="9" width="68" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.98431372549999996" green="0.25490196079999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="zdw-2c-3aR" firstAttribute="leading" secondItem="Ihj-RA-eUt" secondAttribute="leading" constant="15" id="57Z-5T-gQh"/>
+                        <constraint firstAttribute="trailing" secondItem="uuQ-1Q-6cS" secondAttribute="trailing" constant="15" id="6jm-Hv-DBs"/>
+                        <constraint firstItem="zdw-2c-3aR" firstAttribute="top" secondItem="Ihj-RA-eUt" secondAttribute="top" constant="5" id="A13-gn-Qkk"/>
+                        <constraint firstAttribute="bottom" secondItem="uuQ-1Q-6cS" secondAttribute="bottom" constant="5" id="CU2-jA-GPt"/>
+                        <constraint firstAttribute="bottom" secondItem="zdw-2c-3aR" secondAttribute="bottom" constant="5" id="ROm-gr-vQC"/>
+                        <constraint firstItem="IgS-nv-FfK" firstAttribute="centerY" secondItem="zdw-2c-3aR" secondAttribute="centerY" id="Ylt-h7-m8F"/>
+                        <constraint firstItem="IgS-nv-FfK" firstAttribute="centerX" secondItem="Ihj-RA-eUt" secondAttribute="centerX" id="grj-Gq-PSq"/>
+                        <constraint firstAttribute="height" constant="40" id="i0M-Ku-E75"/>
+                        <constraint firstItem="uuQ-1Q-6cS" firstAttribute="top" secondItem="Ihj-RA-eUt" secondAttribute="top" constant="5" id="wEX-2U-yru"/>
+                    </constraints>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="fg5-X1-HQ3">
+                    <rect key="frame" x="0.0" y="100" width="320" height="228"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="fg5-X1-HQ3" secondAttribute="height" multiplier="80:57" id="xFW-kn-j5Q"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="HQa-0G-kXg">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="aNI-l3-2av"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="Mlp-ro-3Eq"/>
+                    </connections>
+                </collectionView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jAE-R6-h1x">
+                    <rect key="frame" x="0.0" y="328" width="320" height="240"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="XXq-G2-lpi"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="AgQ-lr-OzG"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="jAE-R6-h1x" secondAttribute="bottom" id="4wt-Mg-93S"/>
+                <constraint firstAttribute="trailing" secondItem="Ihj-RA-eUt" secondAttribute="trailing" id="Knp-Af-u22"/>
+                <constraint firstItem="fg5-X1-HQ3" firstAttribute="top" secondItem="Ihj-RA-eUt" secondAttribute="bottom" constant="5" id="LRR-AY-J3f"/>
+                <constraint firstItem="Ihj-RA-eUt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MnK-Q0-8iy"/>
+                <constraint firstAttribute="trailing" secondItem="jAE-R6-h1x" secondAttribute="trailing" id="a5f-ht-caZ"/>
+                <constraint firstItem="Ihj-RA-eUt" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="55" id="fNY-sD-dbk"/>
+                <constraint firstItem="jAE-R6-h1x" firstAttribute="top" secondItem="fg5-X1-HQ3" secondAttribute="bottom" id="hhS-oz-gHu"/>
+                <constraint firstAttribute="trailing" secondItem="fg5-X1-HQ3" secondAttribute="trailing" id="hku-aF-FsB"/>
+                <constraint firstItem="fg5-X1-HQ3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rfx-GJ-19s"/>
+                <constraint firstItem="jAE-R6-h1x" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="tBO-0O-Xw8"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <connections>
+                <outlet property="collectionView" destination="fg5-X1-HQ3" id="Hcc-D0-0RD"/>
+                <outlet property="showDateLabel" destination="IgS-nv-FfK" id="PDw-wo-9Bj"/>
+                <outlet property="tableView" destination="jAE-R6-h1x" id="wCX-UO-TlQ"/>
+            </connections>
+            <point key="canvasLocation" x="142" y="312"/>
+        </view>
+    </objects>
+</document>
