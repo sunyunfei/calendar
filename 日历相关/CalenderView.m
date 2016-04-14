@@ -8,6 +8,7 @@
 
 #import "CalenderView.h"
 #import "CalenderCell.h"
+#import "SSLunarDate.h"
 static NSString * const CALENDER = @"CalenderCell";
 @interface CalenderView()
 {
@@ -143,6 +144,25 @@ static NSString * const CALENDER = @"CalenderCell";
     NSUInteger firstWeekday = [calendar ordinalityOfUnit:NSCalendarUnitWeekday inUnit:NSCalendarUnitWeekOfMonth forDate:firstDayOfMonthDate];
     return firstWeekday - 1;
 }
+/**
+ *  获取对应的农历
+ *
+ *  @param date <#date description#>
+ *
+ *  @return <#return value description#>
+ */
+- (SSLunarDate *)lunarDaysString:(NSDate *)date int:(int)nowIndex{
+
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    
+    //设置天数
+    [dateComponents setDay:nowIndex];
+    
+    NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:_date options:0];
+    [self setShowDateLabelString:newDate];
+    SSLunarDate *lunar = [[SSLunarDate alloc] initWithDate:newDate];
+    return lunar;
+}
 #pragma mark-----------------------------
 #pragma mark-----表的代理
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -184,13 +204,16 @@ static NSString * const CALENDER = @"CalenderCell";
                                                    green:0.0
                                                     blue:0.0
                                                    alpha:0.495803420608108];
+        cell.lunarLabel.hidden = YES;
     }else{
         cell.dateLabel.textColor = [UIColor colorWithRed:0.0
                                                    green:0.0
                                                     blue:0.0
                                                    alpha:0.495803420608108];
+        cell.lunarLabel.hidden = NO;
         //获得本月第一天在星期几
         allDayArray = [NSMutableArray array];
+        
         NSInteger day = [self currentFirstDay:_date];
         for (NSInteger i = 0; i < day; i++){
             [allDayArray addObject:@""];
@@ -206,6 +229,12 @@ static NSString * const CALENDER = @"CalenderCell";
             [allDayArray addObject:@""];
         }
         cell.dateLabel.text = [NSString stringWithFormat:@"%@",allDayArray[indexPath.row]];
+       SSLunarDate *sdate = [self lunarDaysString:_date int:[allDayArray[indexPath.row] intValue]];
+        cell.lunarLabel.text = [NSString stringWithFormat:@"%@",[sdate dayString]];
+        
+        if ([allDayArray[indexPath.row] isEqual:@""]) {
+            cell.lunarLabel.hidden = YES;
+        }
 
     }
     return cell;

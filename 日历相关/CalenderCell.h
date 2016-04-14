@@ -10,5 +10,6 @@
 
 @interface CalenderCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lunarLabel;
 
 @end
